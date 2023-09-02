@@ -8,7 +8,7 @@ export interface AutocompleteListProps {
   isOpen: boolean;
 }
 
-export function AutocompleteList({
+export function AutoCompleteList({
   text,
   options,
   isLoading,
@@ -46,6 +46,7 @@ export function AutocompleteList({
           className="auto-complete-list-item"
           title={value}
           onClick={() => onSelect({ value, label })}
+          onMouseDown={(e) => e.preventDefault()}
         >
           {highlightText(label, text)}
         </li>

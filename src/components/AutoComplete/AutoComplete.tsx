@@ -1,6 +1,6 @@
 import React from "react";
 import "./AutoComplete.css";
-import { AutocompleteList } from "./AutoCompleteList";
+import { AutoCompleteList } from "./AutoCompleteList";
 
 type AutoCompleteProps = {
   onSearch: (searchTerm: string) => void;
@@ -43,7 +43,7 @@ export default function AutoComplete({
         onBlur={() => setIsListOpen(false)}
       />
       {searchTerm.length >= minCharacters && (
-        <AutocompleteList
+        <AutoCompleteList
           text={searchTerm}
           options={options}
           isLoading={isLoading}
