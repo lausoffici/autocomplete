@@ -17,12 +17,18 @@ export default function App() {
     [cocktails]
   );
 
+  function onSelect(option: { label: string; value: string }) {
+    console.log(option);
+  }
+
   return (
     <main>
-      <h1>{"<AutoComplete />"}</h1>
+      <h1>Search Cocktails</h1>
       <AutoComplete
-        placeholder="Type at least 4 characters..."
+        minCharacters={1}
+        placeholder="Search cocktails..."
         onSearch={setCocktailName}
+        onSelect={onSelect}
         options={options}
         isLoading={isCocktailsLoading}
       />
