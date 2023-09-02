@@ -2,6 +2,7 @@ import React from "react";
 import useGetCocktails from "../../hooks/useGetCocktails";
 import { mapCocktailResponseToOptions } from "../../utils";
 import AutoComplete from "../AutoComplete";
+import CocktailSticker from "../../assets/cocktail.png";
 import "./App.css";
 
 export default function App() {
@@ -24,6 +25,11 @@ export default function App() {
   return (
     <main>
       <h1>Search Cocktails</h1>
+
+      <picture className="cocktail-sticker-wrapper">
+        <img src={CocktailSticker} alt="Cocktail" height={70} />
+      </picture>
+
       <AutoComplete
         minCharacters={1}
         placeholder="Search cocktails..."
