@@ -1,18 +1,21 @@
 import React from "react";
 import "./AutoComplete.css";
+import { AutocompleteList } from "./AutoCompleteList";
 
 type AutoCompleteProps = {
-  onFetch: (searchTerm: string) => void;
+  onSearch: (searchTerm: string) => void;
+  isLoading: boolean;
   minCharacters?: number;
   options?: Array<{ label: string; value: string }>;
   placeholder?: string;
 };
 
 export default function AutoComplete({
-  onFetch,
+  onSearch,
   minCharacters = 4,
   placeholder = "Search...",
   options = [],
+  isLoading,
 }: AutoCompleteProps) {
   const [searchTerm, setSearchTerm] = React.useState("");
 
@@ -22,7 +25,7 @@ export default function AutoComplete({
     setSearchTerm(value);
 
     if (value.length >= minCharacters) {
-      onFetch(value);
+      onSearch(value);
     }
   }
 
@@ -33,14 +36,12 @@ export default function AutoComplete({
         onChange={handleSearchTermChange}
         placeholder={placeholder}
       />
-      {options.length > 0 && (
-        <div className="dropdown">
-          {options.map(({ value, label }) => (
-            <div key={value} className="dropdown-item" title={value}>
-              {label}
-            </div>
-          ))}
-        </div>
+      {searchTerm.length >= minCharacters && (
+        <AutocompleteList
+          text={searchTerm}
+          options={options}
+          isLoading={isLoading}
+        />
       )}
     </div>
   );
