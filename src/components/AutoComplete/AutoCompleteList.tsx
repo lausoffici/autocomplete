@@ -23,18 +23,33 @@ export function AutocompleteList({
   if (text && !options.length)
     return <div className="auto-complete-list empty">No results found</div>;
 
+  function highlightText(text: string, query: string) {
+    const regex = new RegExp(`(${query})`, "gi");
+
+    return text.split(regex).map((part, index) => {
+      if (part.toLowerCase() === query.toLowerCase()) {
+        return (
+          <span className="highlight" key={index}>
+            {part}
+          </span>
+        );
+      }
+      return part;
+    });
+  }
+
   return (
-    <div className="auto-complete-list">
+    <ul className="auto-complete-list">
       {options.map(({ value, label }) => (
-        <div
+        <li
           key={value}
           className="auto-complete-list-item"
           title={value}
           onClick={() => onSelect({ value, label })}
         >
-          {label}
-        </div>
+          {highlightText(label, text)}
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }

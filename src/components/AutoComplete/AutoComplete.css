@@ -39,3 +39,8 @@
   font-size: 0.9rem;
   color: #999;
 }
+
+.highlight {
+  background-color: #ccc;
+  color: #000;
+}
