@@ -1,26 +1,19 @@
 import React from "react";
 import "./AutoComplete.css";
 
-const data = [
-  {
-    label: "Test",
-    value: "test",
-  },
-  {
-    label: "Test2",
-    value: "test2",
-  },
-  {
-    label: "Test3",
-    value: "test4",
-  },
-];
-
 type AutoCompleteProps = {
+  onFetch: (searchTerm: string) => void;
   minCharacters?: number;
+  options?: Array<{ label: string; value: string }>;
+  placeholder?: string;
 };
 
-export default function AutoComplete({ minCharacters = 4 }: AutoCompleteProps) {
+export default function AutoComplete({
+  onFetch,
+  minCharacters = 4,
+  placeholder = "Search...",
+  options = [],
+}: AutoCompleteProps) {
   const [searchTerm, setSearchTerm] = React.useState("");
 
   function handleSearchTermChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -29,20 +22,26 @@ export default function AutoComplete({ minCharacters = 4 }: AutoCompleteProps) {
     setSearchTerm(value);
 
     if (value.length >= minCharacters) {
-      // fetch data
+      onFetch(value);
     }
   }
 
   return (
     <div className="auto-complete">
-      <input value={searchTerm} onChange={handleSearchTermChange} />
-      <div className="dropdown">
-        {data.map(({ value, label }) => (
-          <div key={value} className="dropdown-item" title={value}>
-            {label}
-          </div>
-        ))}
-      </div>
+      <input
+        value={searchTerm}
+        onChange={handleSearchTermChange}
+        placeholder={placeholder}
+      />
+      {options.length > 0 && (
+        <div className="dropdown">
+          {options.map(({ value, label }) => (
+            <div key={value} className="dropdown-item" title={value}>
+              {label}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
