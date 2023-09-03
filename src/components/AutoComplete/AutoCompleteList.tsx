@@ -77,7 +77,7 @@ function EmptyState() {
       className="auto-complete-list empty"
       onMouseDown={(e) => e.preventDefault()}
     >
-      <img src={EmptyBox} alt="Empty box" height={50} />
+      <img src={EmptyBox} alt="Empty box" height={50} loading="eager" />
       No results found
     </div>
   );
