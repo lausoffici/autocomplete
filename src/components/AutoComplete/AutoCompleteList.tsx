@@ -4,6 +4,7 @@ export interface AutocompleteListProps {
   text: string;
   options: Array<{ label: string; value: string }>;
   isLoading: boolean;
+  isIdle: boolean;
   onSelect: (option: { label: string; value: string }) => void;
   isOpen: boolean;
 }
@@ -12,15 +13,16 @@ export function AutoCompleteList({
   text,
   options,
   isLoading,
+  isIdle,
   onSelect,
   isOpen,
 }: AutocompleteListProps) {
-  if (!isOpen) return null;
+  if (!isOpen || isIdle) return null;
 
   if (isLoading)
     return <div className="auto-complete-list empty">Loading...</div>;
 
-  if (text && !options.length)
+  if (!options.length)
     return <div className="auto-complete-list empty">No results found</div>;
 
   function highlightText(text: string, query: string) {

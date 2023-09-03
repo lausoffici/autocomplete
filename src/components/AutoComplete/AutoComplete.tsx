@@ -7,6 +7,7 @@ type AutoCompleteProps = {
   onSearch: (searchTerm: string) => void;
   onSelect: (option: { label: string; value: string }) => void;
   isLoading: boolean;
+  isIdle: boolean;
   minCharacters?: number;
   options?: Array<{ label: string; value: string }>;
   placeholder?: string;
@@ -19,6 +20,7 @@ export default function AutoComplete({
   placeholder = "Search...",
   options = [],
   isLoading,
+  isIdle,
 }: AutoCompleteProps) {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [isListOpen, setIsListOpen] = React.useState(false);
@@ -54,6 +56,7 @@ export default function AutoComplete({
           text={searchTerm}
           options={options}
           isLoading={isLoading}
+          isIdle={isIdle}
           onSelect={onSelect}
           isOpen={isListOpen}
         />
