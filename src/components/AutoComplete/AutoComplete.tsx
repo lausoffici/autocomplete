@@ -57,6 +57,7 @@ export default function AutoComplete({
         onFocus={() => setIsListOpen(true)}
         onBlur={() => setIsListOpen(false)}
         maxLength={maxLength}
+        data-testid="auto-complete-input"
       />
       <AutoCompleteList
         text={searchTerm}

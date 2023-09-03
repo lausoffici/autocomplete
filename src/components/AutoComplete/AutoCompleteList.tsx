@@ -40,13 +40,18 @@ export function AutoCompleteList({
   if (!options.length) return <EmptyState />;
 
   return (
-    <ul className="auto-complete-list" onMouseDown={(e) => e.preventDefault()}>
+    <ul
+      className="auto-complete-list"
+      onMouseDown={(e) => e.preventDefault()}
+      role="listbox"
+    >
       {options.map(({ value, label }) => (
         <li
           key={value}
           className="auto-complete-list__item"
           title={value}
           onClick={() => onSelect({ value, label })}
+          role="option"
         >
           {highlightText(label, text)}
         </li>
