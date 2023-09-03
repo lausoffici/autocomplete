@@ -1,4 +1,5 @@
 import Spinner from "../Spinner";
+import EmptyBox from "../../assets/empty-box.png";
 import "./AutoComplete.css";
 
 export interface AutocompleteListProps {
@@ -22,13 +23,18 @@ export function AutoCompleteList({
 
   if (isLoading)
     return (
-      <div className="auto-complete-list empty">
+      <div className="auto-complete-list loading">
         <Spinner />
       </div>
     );
 
   if (!options.length)
-    return <div className="auto-complete-list empty">No results found</div>;
+    return (
+      <div className="auto-complete-list empty">
+        <img src={EmptyBox} alt="Empty box" height={50} />
+        No results found
+      </div>
+    );
 
   function highlightText(text: string, query: string) {
     const regex = new RegExp(`(${query})`, "gi");
