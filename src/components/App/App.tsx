@@ -10,11 +10,8 @@ export default function App() {
   // It will be updated by the AutoComplete component when the user types and the search term is long enough.
   const [cocktailName, setCocktailName] = React.useState("");
 
-  const {
-    data: cocktails,
-    isLoading: isCocktailsLoading,
-    isIdle: isCocktailsIdle,
-  } = useGetCocktails(cocktailName);
+  const { data: cocktails, isLoading: isCocktailsLoading } =
+    useGetCocktails(cocktailName);
 
   const options = React.useMemo(
     () => mapCocktailResponseToOptions(cocktails),
@@ -39,7 +36,6 @@ export default function App() {
         onSelect={onSelect}
         options={options}
         isLoading={isCocktailsLoading}
-        isIdle={isCocktailsIdle}
       />
     </main>
   );

@@ -11,7 +11,6 @@ import {
 type AutoCompleteProps = {
   onSearch: (searchTerm: string) => void;
   isLoading: boolean;
-  isIdle: boolean;
   onSelect?: (option: { label: string; value: string }) => void;
   options?: Array<{ label: string; value: string }>;
   placeholder?: string;
@@ -23,7 +22,6 @@ type AutoCompleteProps = {
 export default function AutoComplete({
   onSearch,
   isLoading,
-  isIdle,
   onSelect,
   options = [],
   placeholder = "Search...",
@@ -60,16 +58,13 @@ export default function AutoComplete({
         onBlur={() => setIsListOpen(false)}
         maxLength={maxLength}
       />
-      {searchTerm.length >= minCharacters && (
-        <AutoCompleteList
-          text={searchTerm}
-          options={options}
-          isLoading={isLoading}
-          isIdle={isIdle}
-          onSelect={onSelect}
-          isOpen={isListOpen}
-        />
-      )}
+      <AutoCompleteList
+        text={searchTerm}
+        options={options}
+        isLoading={isLoading}
+        onSelect={onSelect}
+        isOpen={isListOpen}
+      />
     </div>
   );
 }
