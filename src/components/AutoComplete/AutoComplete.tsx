@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useCallback } from "react";
 import "./AutoComplete.css";
 import { AutoCompleteList } from "./AutoCompleteList";
+import { debounce } from "../../utils/debounce";
 
 type AutoCompleteProps = {
   onSearch: (searchTerm: string) => void;
@@ -28,9 +29,14 @@ export default function AutoComplete({
     setSearchTerm(value);
 
     if (value.length >= minCharacters) {
-      onSearch(value);
+      debouncedSearch(value);
     }
   }
+
+  const debouncedSearch = useCallback(
+    debounce((searchTerm: string) => onSearch(searchTerm), 500),
+    []
+  );
 
   return (
     <div className="auto-complete">
@@ -41,6 +47,7 @@ export default function AutoComplete({
         placeholder={placeholder}
         onFocus={() => setIsListOpen(true)}
         onBlur={() => setIsListOpen(false)}
+        maxLength={50}
       />
       {searchTerm.length >= minCharacters && (
         <AutoCompleteList
