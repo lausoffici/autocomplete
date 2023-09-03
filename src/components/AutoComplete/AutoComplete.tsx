@@ -2,25 +2,34 @@ import React, { useCallback } from "react";
 import "./AutoComplete.css";
 import { AutoCompleteList } from "./AutoCompleteList";
 import { debounce } from "../../utils/debounce";
+import {
+  AUTO_COMPLETE_DEFAULT_DELAY,
+  AUTO_COMPLETE_DEFAULT_MAX_LENGTH,
+  AUTO_COMPLETE_DEFAULT_MIN_CHARACTERS,
+} from "../../constants";
 
 type AutoCompleteProps = {
   onSearch: (searchTerm: string) => void;
-  onSelect: (option: { label: string; value: string }) => void;
   isLoading: boolean;
   isIdle: boolean;
-  minCharacters?: number;
+  onSelect?: (option: { label: string; value: string }) => void;
   options?: Array<{ label: string; value: string }>;
   placeholder?: string;
+  minCharacters?: number;
+  maxLength?: number;
+  delay?: number;
 };
 
 export default function AutoComplete({
   onSearch,
-  onSelect,
-  minCharacters = 4,
-  placeholder = "Search...",
-  options = [],
   isLoading,
   isIdle,
+  onSelect,
+  options = [],
+  placeholder = "Search...",
+  minCharacters = AUTO_COMPLETE_DEFAULT_MIN_CHARACTERS,
+  maxLength = AUTO_COMPLETE_DEFAULT_MAX_LENGTH,
+  delay = AUTO_COMPLETE_DEFAULT_DELAY,
 }: AutoCompleteProps) {
   const [searchTerm, setSearchTerm] = React.useState("");
   const [isListOpen, setIsListOpen] = React.useState(false);
@@ -36,12 +45,12 @@ export default function AutoComplete({
   }
 
   const debouncedSearch = useCallback(
-    debounce((searchTerm: string) => onSearch(searchTerm), 500),
+    debounce((searchTerm: string) => onSearch(searchTerm), delay),
     []
   );
 
   return (
-    <div className="auto-complete">
+    <div className="auto-complete-wrapper">
       <input
         className="auto-complete-input"
         value={searchTerm}
@@ -49,7 +58,7 @@ export default function AutoComplete({
         placeholder={placeholder}
         onFocus={() => setIsListOpen(true)}
         onBlur={() => setIsListOpen(false)}
-        maxLength={50}
+        maxLength={maxLength}
       />
       {searchTerm.length >= minCharacters && (
         <AutoCompleteList

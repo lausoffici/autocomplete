@@ -34,7 +34,6 @@ export default function App() {
       </picture>
 
       <AutoComplete
-        minCharacters={1}
         placeholder="Search cocktails..."
         onSearch={setCocktailName}
         onSelect={onSelect}

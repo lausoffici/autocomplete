@@ -1,4 +1,4 @@
-.auto-complete {
+.auto-complete-wrapper {
   position: relative;
 }
 
@@ -21,14 +21,14 @@
   background-color: #242424;
 }
 
-.auto-complete-list-item {
+.auto-complete-list__item {
   padding: 0.5rem;
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.1s ease;
 }
 
-.auto-complete-list-item:hover {
+.auto-complete-list__item:hover {
   background-color: #ccc;
   color: #000;
 }

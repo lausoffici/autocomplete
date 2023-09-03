@@ -6,8 +6,8 @@ export interface AutocompleteListProps {
   options: Array<{ label: string; value: string }>;
   isLoading: boolean;
   isIdle: boolean;
-  onSelect: (option: { label: string; value: string }) => void;
   isOpen: boolean;
+  onSelect?: (option: { label: string; value: string }) => void;
 }
 
 export function AutoCompleteList({
@@ -15,8 +15,8 @@ export function AutoCompleteList({
   options,
   isLoading,
   isIdle,
-  onSelect,
   isOpen,
+  onSelect = () => {},
 }: AutocompleteListProps) {
   if (!isOpen || isIdle) return null;
 
@@ -50,7 +50,7 @@ export function AutoCompleteList({
       {options.map(({ value, label }) => (
         <li
           key={value}
-          className="auto-complete-list-item"
+          className="auto-complete-list__item"
           title={value}
           onClick={() => onSelect({ value, label })}
           onMouseDown={(e) => e.preventDefault()}
