@@ -1,5 +1,11 @@
 import useFetch from "./useFetch";
-import { CocktailResponse } from "../types";
+
+type CocktailResponse = {
+  drinks: Array<{
+    idDrink: string;
+    strDrink: string;
+  }>;
+};
 
 export default function useGetCocktails(name: string) {
   return useFetch<CocktailResponse>({
