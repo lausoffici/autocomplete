@@ -1,6 +1,6 @@
 import useFetch from "./useFetch";
 
-type CocktailResponse = {
+export type CocktailResponse = {
   drinks: Array<{
     idDrink: string;
     strDrink: string;

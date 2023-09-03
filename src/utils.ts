@@ -1,4 +1,4 @@
-import { CocktailResponse } from "./types";
+import { CocktailResponse } from "./hooks/useGetCocktails";
 
 export const mapCocktailResponseToOptions = (
   cocktails: CocktailResponse | undefined
