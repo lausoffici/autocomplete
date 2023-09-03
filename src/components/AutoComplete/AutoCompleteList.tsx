@@ -1,3 +1,4 @@
+import Spinner from "../Spinner";
 import "./AutoComplete.css";
 
 export interface AutocompleteListProps {
@@ -20,7 +21,11 @@ export function AutoCompleteList({
   if (!isOpen || isIdle) return null;
 
   if (isLoading)
-    return <div className="auto-complete-list empty">Loading...</div>;
+    return (
+      <div className="auto-complete-list empty">
+        <Spinner />
+      </div>
+    );
 
   if (!options.length)
     return <div className="auto-complete-list empty">No results found</div>;
