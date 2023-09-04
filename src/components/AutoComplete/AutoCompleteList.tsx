@@ -5,7 +5,7 @@ import "./AutoComplete.css";
 export interface AutocompleteListProps {
   text: string;
   options: Array<{ label: string; value: string }>;
-  isLoading: boolean;
+  isLoading?: boolean;
   isOpen: boolean;
   onSelect?: (option: { label: string; value: string }) => void;
 }

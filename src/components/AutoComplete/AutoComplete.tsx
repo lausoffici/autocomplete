@@ -10,7 +10,7 @@ import {
 
 type AutoCompleteProps = {
   onSearch: (searchTerm: string) => void;
-  isLoading: boolean;
+  isLoading?: boolean;
   onSelect?: (option: { label: string; value: string }) => void;
   options?: Array<{ label: string; value: string }>;
   placeholder?: string;
